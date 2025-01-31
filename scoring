@@ -1,0 +1,54 @@
+#include <stdio.h>
+
+int calculateCreditScore(int paymentHistory, int creditUtilization, int income, int debtLevel) {
+    int score = 300; // Base score
+    
+    score += paymentHistory * 2; // Assuming max 100
+    
+    score += (100 - creditUtilization) * 1.5; // Assuming max 100
+
+    score += income / 1000; // Assuming income in thousands
+    
+    score -= debtLevel / 500; // Assuming debt in thousands
+
+    if (score > 850) score = 850;
+    if (score < 300) score = 300;
+    
+    return score;
+}
+
+int main() {
+    int paymentHistory, creditUtilization, income, debtLevel;
+    
+
+    printf("Enter Payment History (0-100): ");
+    scanf("%d", &paymentHistory);
+    
+    printf("Enter Credit Utilization (0-100): ");
+    scanf("%d", &creditUtilization);
+    
+    printf("Enter Monthly Income (in thousands): ");
+    scanf("%d", &income);
+    
+    printf("Enter Total Debt (in thousands): ");
+    scanf("%d", &debtLevel);
+    
+
+    int creditScore = calculateCreditScore(paymentHistory, creditUtilization, income, debtLevel);
+    
+
+    printf("Your calculated credit score is: %d\n", creditScore);
+    
+
+    if (creditScore >= 750) {
+        printf("Excellent Credit\n");
+    } else if (creditScore >= 650) {
+        printf("Good Credit\n");
+    } else if (creditScore >= 550) {
+        printf("Fair Credit\n");
+    } else {
+        printf("Poor Credit\n");
+    }
+    
+    return 0;
+}
